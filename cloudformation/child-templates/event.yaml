@@ -12,7 +12,7 @@ Resources:
     Properties:
       Tags:
         - Key: Environment
-          Value: !Ref Environment
+          Value: !Ref EnvironmentName
   
   FileQueuePolicy:
     Type: AWS::SQS::QueuePolicy
@@ -52,4 +52,5 @@ Outputs:
     Value: !GetAtt NotificationQueue.Arn
   EventRuleArn:
     Value: !GetAtt EventRule.Arn
+
   
