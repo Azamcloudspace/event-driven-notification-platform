@@ -23,9 +23,6 @@ Resources:
 Outputs:
   SNSTopicName:
     Value: !Ref SNSTopic
-  
-  SNSTopicArn:
-    Value: !GetAtt SNSTopic.Arn
 
   SNSEmailSubscription:
     Value: !Ref EmailSubscription
