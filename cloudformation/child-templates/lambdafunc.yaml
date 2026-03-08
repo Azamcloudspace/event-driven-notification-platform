@@ -35,6 +35,11 @@ Resources:
       Handler: lambda.app.lambda_handler
       Role: !GetAtt LambdaExecutionRole.Arn
       Runtime: python3.13
+      Code:
+        ZipFile: |
+          def handler(event, context):
+              print("Placeholder Lambda executed")
+              return {"status": "ok"}
       Timeout: 60
       Environment:
         Variables:
@@ -54,6 +59,7 @@ Outputs:
 
   NotificationProcessorLambdaArn:
     Value: !GetAtt NotificationProcessorLambda.Arn
+
 
 
 
