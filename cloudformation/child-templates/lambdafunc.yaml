@@ -51,12 +51,13 @@ Resources:
       FunctionName: !Ref NotificationProcessorLambda
       Action: lambda:InvokeFunction
       Principal: events.amazonaws.com
-      SourceArn: !Sub "arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/{EnvironmentName}-Notification-Event"
+      SourceArn: !Sub "arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/${EnvironmentName}-Notification-Event"
    
 Outputs:
 
   NotificationProcessorLambdaArn:
     Value: !GetAtt NotificationProcessorLambda.Arn
+
 
 
 
