@@ -15,7 +15,7 @@ Parameters:
     Type: String
     Default: main
 
-  CodeStarConnectionArn:
+  CodestarConnectionArn:
     Type: String
 
   NotifyLambda:
@@ -116,7 +116,7 @@ Resources:
                 Provider: CodeStarSourceConnection
                 Version: "1"
               Configuration:
-                ConnectionArn: !Ref CodeStarConnectionArn
+                ConnectionArn: !Ref CodestarConnectionArn
                 FullRepositoryId: !Sub "${GitHubOwner}/${GitHubRepo}"
                 BranchName: !Ref GitHubBranch
                 DetectChanges: false
@@ -166,5 +166,6 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
