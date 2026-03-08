@@ -40,7 +40,6 @@ Resources:
           def handler(event, context):
               print("Placeholder Lambda executed")
               return {"status": "ok"}
-      Timeout: 60
       Environment:
         Variables:
           SNS_TOPIC_ARN: !Ref SNSTopic
@@ -59,6 +58,7 @@ Outputs:
 
   NotificationProcessorLambdaArn:
     Value: !GetAtt NotificationProcessorLambda.Arn
+
 
 
 
