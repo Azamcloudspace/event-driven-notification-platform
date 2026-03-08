@@ -5,8 +5,6 @@ Parameters:
     Type: String
   SNSTopic:
     Type: String
-  Event:
-    Type: String
 
 Resources:
   LambdaExecutionRole:
@@ -53,12 +51,13 @@ Resources:
       FunctionName: !Ref NotificationProcessorLambda
       Action: lambda:InvokeFunction
       Principal: events.amazonaws.com
-      SourceArn: !Ref Event
+      SourceArn: !Sub ""
    
 Outputs:
 
   NotificationProcessorLambdaArn:
     Value: !GetAtt NotificationProcessorLambda.Arn
+
 
 
 
