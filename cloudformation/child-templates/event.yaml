@@ -8,27 +8,6 @@ Parameters:
     Type: String
 Resources:
 
-  NotificationQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      Tags:
-        - Key: Environment
-          Value: !Ref EnvironmentName
-  
-  FileQueuePolicy:
-    Type: AWS::SQS::QueuePolicy
-    Properties:
-      Queues:
-        - !Ref NotificationQueue
-      PolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: events.amazonaws.com
-            Action: sqs:SendMessage
-            Resource: !GetAtt NotificationQueue.Arn
-
   EventRule:
     Type: AWS::Events::Rule
     Properties:
@@ -50,12 +29,11 @@ Resources:
           Value: !Ref EnvironmentName
 
 Outputs: 
-  NotificationQueueArn:
-    Value: !GetAtt NotificationQueue.Arn
   EventRuleArn:
     Value: !GetAtt EventRule.Arn
 
   
+
 
 
 
