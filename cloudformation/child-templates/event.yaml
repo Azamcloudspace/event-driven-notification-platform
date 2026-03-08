@@ -41,8 +41,8 @@ Resources:
             name:
               - !Ref InputBucket
       Targets:
-        - Arn: !GetAtt NotificationQueue.Arn
-          Id: NotificationQueueTarget
+        - Arn: !Ref NotifyLamda
+          Id: LambdaTarget
       Tags:
         - Key: Environment
           Value: !Ref EnvironmentName
@@ -54,3 +54,4 @@ Outputs:
     Value: !GetAtt EventRule.Arn
 
   
+
