@@ -159,7 +159,6 @@ Resources:
                 - Name: SourceOutput
               Configuration:
                 FunctionName: !Ref NotifyLambda
-                UserParameters: lambda.zip
 
       Tags:
         - Key: Environment
@@ -168,6 +167,7 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
 
