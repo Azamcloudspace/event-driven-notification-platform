@@ -39,7 +39,6 @@ Resources:
             Principal:
               Service: 
                 - codepipeline.amazonaws.com
-                - codebuild.amazonaws.com
             Action: sts:AssumeRole
       Policies:
         - PolicyName: CodePipelinePolicy
@@ -85,27 +84,8 @@ Resources:
                   - lambda:UpdateFunctionCode
                   - lambda:GetFunction
                   - lambda:GetFunctionConfiguration
-                Resource: !Ref NotifyLambda"
-                
-  NotifyBuild:
-    Type: AWS::CodeBuild::Project
-    Properties:
-      Name: !Sub "${EnvironmentName}-notify-build"
-      ServiceRole: !Ref CodePipelineRole
-      Artifacts:
-        Type: CODEPIPELINE
-      Environment:
-        ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/standard:7.0
-        Type: LINUX_CONTAINER
-      Source:
-        Type: CODEPIPELINE
-        BuildSpec: ci/buildspec.yml
-      TimeoutInMinutes: 10
-      Tags:
-        - Key: Environment
-          Value: !Ref EnvironmentName
-
+                  - lambda:PublishVersion
+                Resource: !Ref NotifyLambda
 
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
@@ -140,22 +120,6 @@ Resources:
                 Owner: AWS
                 Provider: Manual
                 Version: '1'
-        
-        - Name: Build
-          Actions:
-            - Name: CodeBuild
-              ActionTypeId:
-                Category: Build
-                Owner: AWS
-                Provider: CodeBuild
-                Version: "1"
-              InputArtifacts:
-                - Name: SourceOutput
-              Configuration:
-                ProjectName: !Ref NotifyBuild
-              OutputArtifacts:
-                - Name: BuildOutput
-
 
         - Name: Deploy
           Actions:
@@ -166,7 +130,7 @@ Resources:
                 Provider: Lambda
                 Version: "1"
               InputArtifacts:
-                - Name: BuildOutput
+                - Name: SourceOutput
               Configuration:
                 FunctionName: !Ref NotifyLambda
 
@@ -177,6 +141,7 @@ Resources:
 Outputs:
   PipelineName:
     Value: !Ref Pipeline
+
 
 
 
