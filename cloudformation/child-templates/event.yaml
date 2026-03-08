@@ -32,6 +32,7 @@ Resources:
   EventRule:
     Type: AWS::Events::Rule
     Properties:
+      Name: !Sub "${EnvironmentName}-Notification-Event"
       EventPattern:
         source:
           - aws.s3
@@ -55,5 +56,6 @@ Outputs:
     Value: !GetAtt EventRule.Arn
 
   
+
 
 
