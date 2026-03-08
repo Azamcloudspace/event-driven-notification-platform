@@ -55,17 +55,11 @@ Resources:
       Principal: events.amazonaws.com
       SourceArn: !Ref Event
    
-  MyLambdaEventMapping:
-    Type: AWS::Lambda::EventSourceMapping
-    Properties:
-      EventSourceArn: !Ref Event
-      FunctionName: !GetAtt NotificationProcessorLambda.Arn
-      Enabled: true
-      BatchSize: 10
 Outputs:
 
   NotificationProcessorLambdaArn:
     Value: !GetAtt NotificationProcessorLambda.Arn
+
 
 
 
