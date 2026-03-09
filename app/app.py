@@ -35,11 +35,11 @@ def lambda_handler(event, context):
             Subject="Large File Uploaded"
         )
 
-    if key and key.endswith(".csv"):
+    if key and key.endswith(".yaml"):
         sns.publish(
             TopicArn=DATA_TEAM_TOPIC,
             Message=json.dumps(message),
-            Subject="New CSV Dataset Uploaded"
+            Subject="New YAML Dataset Uploaded"
         )
 
     if key and key.startswith("finance/"):
@@ -53,6 +53,7 @@ def lambda_handler(event, context):
         "statusCode": 200,
         "body": json.dumps("Notifications processed")
     }
+
 
 
 
